@@ -1,13 +1,19 @@
 import unittest
 
+conversion_map = (
+    ('x', 10),
+    ('v', 5),
+    ('iv', 4),
+    ('i', 1))
+
 
 def ar2rom(val):
-    if val == 1:
-        return 'i'
-    elif val == 2:
-        return 'ii'
-    elif val == 3:
-        return 'iii'
+    res = ''
+    for rom, ar in conversion_map:
+        while val >= ar:
+            res += rom
+            val -= ar
+    return res
 
 
 class Tests(unittest.TestCase):
