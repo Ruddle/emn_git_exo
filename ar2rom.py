@@ -1,13 +1,22 @@
 import unittest
 
+conversion_map = (
+    ('X', 10),
+    ('IX', 9),
+    ('V', 5),
+    ('IV', 4),
+    ('I', 1))
+
 
 def ar2rom(val):
-    if val == 1:
-        return 'I'
-    elif val == 2:
-        return 'II'
-    elif val == 3:
-        return 'III'
+
+    res = ''
+    for rom, ar in conversion_map:
+        while val >= ar:
+            res += rom
+            val -= ar
+    return res
+
 
 
 class Tests(unittest.TestCase):
@@ -28,6 +37,9 @@ class Tests(unittest.TestCase):
 
     def test_10_to_X(self):
         self.assertEqual(ar2rom(10), 'X')
+
+    def test_9_to_IX(self):
+        self.assertEqual(ar2rom(9), 'IX')
 
     def test_20_to_XX(self):
         self.assertEqual(ar2rom(20), 'XX')
